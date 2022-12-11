@@ -14,15 +14,15 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Sign />,
-        errorElement: <ErrorComponent />,
+        // errorElement: <ErrorComponent />,
       },
       {
         path: "/todo",
         element: <ToDo />,
-        errorElement: <ErrorComponent />,
+        //errorElement: <ErrorComponent />,
       },
     ],
-    errorElement: <NotFound />,
+    //errorElement: <NotFound />,
   },
 ]);
 
