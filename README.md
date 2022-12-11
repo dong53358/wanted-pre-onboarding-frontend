@@ -41,6 +41,7 @@
 
 ---
 ### 폴더구조
+```
 src
  ┣ components
  ┃ ┣ error
@@ -60,3 +61,4 @@ src
  ┣ Root.js
  ┣ Router.js
  ┗ setupTests.js
+ ```
