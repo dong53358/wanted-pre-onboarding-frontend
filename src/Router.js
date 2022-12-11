@@ -7,7 +7,7 @@ import ErrorComponent from "./components/error/ErrorComponent";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: `${process.env.PUBLIC_URL}/`,
     element: <Root />,
     children: [
       {
