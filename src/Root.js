@@ -1,4 +1,5 @@
 import { Outlet } from "react-router-dom";
+import { RecoilRoot } from "recoil";
 import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400&display=swap');
@@ -67,12 +68,13 @@ a {
   color:inherit;
 }
 `;
+
 function Root() {
   return (
-    <div>
+    <RecoilRoot>
       <GlobalStyle />
       <Outlet />
-    </div>
+    </RecoilRoot>
   );
 }
 

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import Auth from "./Auth";
+import { signUpAPI } from "../../../api/api";
+import Auth from "../hoc/Auth";
 
 const Main = styled.div`
   display: flex;
@@ -121,6 +122,10 @@ const SignInBtn = styled.button`
   background-color: ${(props) => (props.disabled ? "#A9A9F5" : "#2E2EFE")};
 `;
 
+const CheckErr = styled.span`
+  color: red;
+  padding: 5px 10px;
+`;
 function Sign() {
   const [signUpEmail, setSignUpEmail] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
@@ -145,11 +150,7 @@ function Sign() {
         email: signUpEmail,
         password: signUpPassword,
       }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-      });
+    }).then((response) => response.json());
     setSignUpEmail("");
     setSignUpPassword("");
   };
@@ -168,7 +169,6 @@ function Sign() {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
         if (res.access_token) {
           navigate("/todo");
         }
@@ -226,12 +226,18 @@ function Sign() {
             type="email"
             value={signUpEmail}
           />
+          {signUpEmailCheck ? null : (
+            <CheckErr>이메일 형식이 올바르지 않습니다</CheckErr>
+          )}
           <input
             placeholder="비밀번호"
             onInput={signUpChange}
             type="password"
             value={signUpPassword}
           />
+          {signUpPasswordCheck ? null : (
+            <CheckErr>비밀번호는 8자 이상이여야 합니다 </CheckErr>
+          )}
           <SignupBtn
             disabled={!(signUpEmailCheck && signUpPasswordCheck)}
             type="submit"
@@ -249,12 +255,18 @@ function Sign() {
             type="email"
             value={signInEmail}
           />
+          {signInEmailCheck ? null : (
+            <CheckErr>이메일 형식이 올바르지 않습니다</CheckErr>
+          )}
           <input
             placeholder="비밀번호"
             onInput={signInChange}
             type="password"
             value={signInPassword}
           />
+          {signInPasswordCheck ? null : (
+            <CheckErr>비밀번호는 8자 이상이여야 합니다 </CheckErr>
+          )}
           <SignInBtn disabled={!(signInEmailCheck && signInPasswordCheck)}>
             로그인
           </SignInBtn>

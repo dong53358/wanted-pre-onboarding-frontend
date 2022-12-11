@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import Auth from "../Auth";
-import TodoList from "./TodoList";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { FaPlus } from "react-icons/fa";
+import { useRecoilState } from "recoil";
+import TodoList from "./TodoList";
+import Auth from "../hoc/Auth";
+import { todoList } from "../../../Recoil/atoms";
 
 const Main = styled.div`
   display: flex;
@@ -94,51 +96,47 @@ const Todo = styled.div`
 `;
 
 function ToDo() {
+  const [recoilTodo, setRecoilTodo] = useRecoilState(todoList);
   const [text, setText] = useState("");
-  const [todos, setTodos] = useState([]);
+  const inputRef = useRef();
   const baseUrl = "https://pre-onboarding-selection-task.shop/";
-  const access_token = localStorage.getItem("token");
   const navigate = useNavigate();
   useState(() => {
     fetch(`${baseUrl}todos`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${access_token}`,
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((response) => response.json())
       .then((res) => {
-        setTodos([...res]);
-        console.log(res);
+        setRecoilTodo([...res]);
       });
-  }, [todos]);
+  }, [recoilTodo]);
+
   const onSubmit = async (event) => {
     event.preventDefault();
 
     await fetch(`${baseUrl}todos`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${access_token}`,
+        Authorization: "Bearer " + localStorage.getItem("token"),
         "Content-type": "application/json",
       },
       body: JSON.stringify({
         todo: text,
       }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-      });
-    await fetch(`${baseUrl}todos`, {
+    }).then((response) => response.json());
+
+    fetch(`${baseUrl}todos`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${access_token}`,
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((response) => response.json())
       .then((res) => {
-        setTodos([...res]);
-        console.log(res);
+        setRecoilTodo([...res]);
       });
     setText("");
   };
@@ -156,6 +154,7 @@ function ToDo() {
       <Add>
         <TodoForm onSubmit={onSubmit}>
           <input
+            ref={inputRef}
             placeholder="To Do"
             onChange={onChange}
             type="text"
@@ -168,7 +167,7 @@ function ToDo() {
       </Add>
 
       <Todo>
-        {todos.map((todo) => (
+        {recoilTodo.map((todo) => (
           <TodoList key={todo.id} todo={todo} />
         ))}
       </Todo>

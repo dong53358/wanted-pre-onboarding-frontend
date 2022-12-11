@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
-import ToDo from "./todo/ToDo";
-import Sign from "./Sign";
+import Sign from "./components/views/sign/Sign";
+import ToDo from "./components/views/todo/ToDo";
 
 const router = createBrowserRouter([
   {
