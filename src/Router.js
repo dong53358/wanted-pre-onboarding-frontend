@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Root from "./Root";
 import Sign from "./components/views/sign/Sign";
 import ToDo from "./components/views/todo/ToDo";
+import NotFound from "./components/error/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
         element: <ToDo />,
       },
     ],
+    errorElement: <NotFound />,
   },
 ]);
 
