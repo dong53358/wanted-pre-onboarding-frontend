@@ -1,14 +1,13 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createHashRouter } from "react-router-dom";
 import Root from "./Root";
 import Sign from "./components/views/sign/Sign";
 import ToDo from "./components/views/todo/ToDo";
 import NotFound from "./components/error/NotFound";
 import ErrorComponent from "./components/error/ErrorComponent";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
-    basename: process.env.PUBLIC_URL,
-    path: `/`,
+    path: "/",
     element: <Root />,
     children: [
       {
