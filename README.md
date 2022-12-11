@@ -21,7 +21,7 @@
 ![todolist](https://user-images.githubusercontent.com/82385282/206913473-c5203e65-f4cf-424f-b8f6-332aa1ecc63d.png)
 
 ---
-## package.json
+### package.json
 ```
 "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -38,3 +38,25 @@
     "web-vitals": "^2.1.4"
   },
 ```
+
+---
+### 폴더구조
+src
+ ┣ components
+ ┃ ┣ error
+ ┃ ┃ ┣ ErrorComponent.js
+ ┃ ┃ ┗ NotFound.js
+ ┃ ┗ views
+ ┃ ┃ ┣ hoc
+ ┃ ┃ ┃ ┗ Auth.js
+ ┃ ┃ ┣ sign
+ ┃ ┃ ┃ ┗ Sign.js
+ ┃ ┃ ┗ todo
+ ┃ ┃ ┃ ┣ ToDo.js
+ ┃ ┃ ┃ ┗ TodoList.js
+ ┣ Recoil
+ ┃ ┗ atoms.js
+ ┣ index.js
+ ┣ Root.js
+ ┣ Router.js
+ ┗ setupTests.js
